@@ -28,11 +28,21 @@ public class TCPClient {
         }
 
         try {
-            System.out.println(in.readLine() + " OK 1.");
-            System.out.println(in.readLine() + " OK 2.");
-            out.println("123");
-            out.println("456");
-            System.out.println(in.readLine() + " OK 3.");
+            out.println("s25748");
+            String first_answer = in.readLine();
+            if (first_answer.contains("Stepan Kozurak")) {
+                System.out.println("The server accept connection. Sending the second question...");
+                out.println("1234password");
+                String second_answer = in.readLine();
+                if (second_answer.contains("accepted")) {
+                    System.out.println("Password was accepted");
+
+                } else {
+                    System.out.println(second_answer + "shit");
+                }
+            } else {
+                System.out.println("something went wrong");
+            }
         } catch (IOException e) {
             System.out.println("Error during communication");
         }

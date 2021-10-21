@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Objects;
 
 public class TestServer {
     public static class ServerThread extends Thread {
@@ -20,12 +21,21 @@ public class TestServer {
             try {
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                out.println("This is Stepan Kozurak.");
-                out.println("715338.");
                 String first = in.readLine();
-                String second = in.readLine();
-                out.println(first + second);
-                System.out.println(first + " " + second);
+                if (first.equals("s25748")) {
+                    out.println("Question for Stepan Kozurak accepted.");
+                    System.out.println("[s25748] - accept");
+                    String second = in.readLine();
+                    if (second.equals("1234password")) {
+                        out.println("password accepted");
+                        System.out.println("["+first+"] OK");
+                    } else {
+                        System.out.println(second);
+                    }
+                } else {
+                    out.println("declined");
+                    System.out.println("reject");
+                }
 
             } catch (IOException e) {
                 // do nothing
